@@ -1,19 +1,22 @@
 pipeline {
     agent any
+
     stages {
-        stage('clonestage'){
+        stage('Clone') {
             steps {
                 git 'https://github.com/shweta123-demo/myrepo.git'
             }
         }
-        stage('buildpackage'){
+
+        stage('Build') {
             steps {
                 sh 'mvn clean package'
             }
         }
-        stage ('release'){
+
+        stage('Release') {
             steps {
-                archive 'target/*.jar'
+                archiveArtifacts artifacts: 'target/*.jar'
             }
         }
     }
